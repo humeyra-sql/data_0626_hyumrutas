@@ -1,11 +1,56 @@
-version: 2
-sources:
-  - name: raw
-    schema: gz_raw_data
-    tables:
-      - name: sales
-        identifier: raw_gz_sales
-      - name: products
-        identifier: raw_gz_product
-      - name: ship
-        identifier: raw_gz_ship
+version: 2 
+sources: 
+  - name: raw 
+    schema: gz_raw_data 
+    description: raw data from our greenwez company 
+    tables: 
+      - name: sales 
+        identifier: raw_gz_sales 
+        description: each product in an per order placed 
+        config:
+          freshness: 
+            warn_after: {count: 90, period: day}
+          loaded_at_field: date_date
+        columns: 
+          - name: date_date 
+            description: date of the order placed 
+            tests: 
+              - not_null 
+              
+          - name: orders_id 
+            description: unique id of order 
+            tests: 
+              - not_null 
+              - unique: 
+                  arguments: 
+                    column_name: "(orders_id || '-' || pdt_id)"
+
+      - name: products 
+        identifier: raw_gz_product 
+        description: one row for product 
+        columns: 
+          - name: products_id 
+            description: unique id of the product placed 
+            tests: 
+              - not_null 
+              - unique 
+              
+          - name: purchse_price 
+            description: Price of the product 
+            tests: 
+              - not_null 
+              
+      - name: ship 
+        identifier: raw_gz_ship 
+        description: one row for ship 
+        columns: 
+          - name: orders_id 
+            description: unique id of the order 
+            tests: 
+              - not_null 
+              - unique 
+              
+          - name: shipping_fee 
+            description: Price of the shipping 
+            tests: 
+              - not_null

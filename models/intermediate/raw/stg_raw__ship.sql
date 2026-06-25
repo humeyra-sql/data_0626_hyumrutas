@@ -5,9 +5,9 @@ with source as (
 
 renamed as (
   select
-    orders_id,
-    shipping_fee,
-    logCost as logcost,
+    orders_id, 
+    shipping_fee, 
+    logcost,
     safe_cast(ship_cost as numeric) as ship_cost
   from source
 )
