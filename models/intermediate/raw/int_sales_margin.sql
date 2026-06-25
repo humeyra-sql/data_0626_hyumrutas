@@ -1,26 +1,26 @@
 with sales as (
     select
+        date_date,
         orders_id,
-        products_id,
-        quantity, 
-        revenue
+        pdt_id as products_id,
+        revenue,
+        quantity
     from {{ source('raw','sales') }}
 ),
 products as (
     select
-        products_id,
-        purchase_price as satin_alma_fiyati
+    products_id,
+    safe_cast(purchSE_PRICE as float64) as purchase_price
     from {{ source('raw','products') }}
 )
 
 select
     s.orders_id,
-    s.products_id,
+    s.date_date,
     s.quantity,
     s.revenue,
-    p.satin_alma_fiyati,
-    s.quantity * p.satin_alma_fiyati as satin_alma_maliyeti,
-    s.revenue - (s.quantity * p.satin_alma_fiyati) as marj
+    s.quantity * p.purchase_price as purchase_cost,
+    round(s.revenue - (s.quantity * p.purchase_price),2) as margin
 from sales as  s
 left join products as p
     on s.products_id = p.products_id
