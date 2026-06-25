@@ -10,7 +10,7 @@ with sales as (
 products as (
     select
     products_id,
-    safe_cast(purchSE_PRICE as float64) as purchase_price
+    safe_cast(purchse_price as float64) as purchase_price
     from {{ source('raw','products') }}
 )
 
