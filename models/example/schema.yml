@@ -7,6 +7,10 @@ sources:
       - name: sales 
         identifier: raw_gz_sales 
         description: each product in an per order placed 
+        config:
+          freshness: 
+            warn_after: {count: 90, period: day}
+          loaded_at_field: date_date
         columns: 
           - name: date_date 
             description: date of the order placed 
