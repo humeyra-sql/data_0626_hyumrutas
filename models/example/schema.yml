@@ -1,49 +1,52 @@
+version: 2 
+sources: 
+  - name: raw 
+    schema: gz_raw_data 
+    description: raw data from our greenwez company 
+    tables: 
+      - name: sales 
+        identifier: raw_gz_sales 
+        description: each product in an per order placed 
+        columns: 
+          - name: date_date 
+            description: date of the order placed 
+            tests: 
+              - not_null 
+              
+          - name: orders_id 
+            description: unique id of order 
+            tests: 
+              - not_null 
+              - unique: 
+                  arguments: 
+                    column_name: "(orders_id || '-' || pdt_id)"
 
-version: 2
-
-sources:
-    - name: raw
-      schema: gz_raw_data
-      description: "raw data from our greenwez company"
-      tables:
-          - name: sales
-            identifier: raw_gz_sales
-            description: "each product in an per order placed"
-            columns:
-              - name: date_date
-                description: "date of the order placed"
-                tests:
-                - not_null
-              - name: orders_id
-                description: "unique id of order"
-                tests:
-                - not_null
-            tests:
-              - unique:
-                  column_name: "orders_id ||'-' ||  pdt_id"
-          - name: products
-            identifier: raw_gz_product
-            description: "one row for  product"
-            columns:
-              - name: products_id
-                description: "unique id of the product placed"
-                tests:
-                - not_null
-                - unique
-              - name: purchSE_PRICE
-                description: "Price of the product"
-                tests:
-                - not_null
-          - name: ship
-            identifier: raw_gz_ship
-            description: "one row for ship"
-            columns:
-              - name: orders_id
-                description: "unique id of the product placed"
-                tests:
-                - not_null
-                - unique
-              - name: shipping_fee
-                description: "Price of the shipping"
-                tests:
-                - not_null
+      - name: products 
+        identifier: raw_gz_product 
+        description: one row for product 
+        columns: 
+          - name: products_id 
+            description: unique id of the product placed 
+            tests: 
+              - not_null 
+              - unique 
+              
+          - name: purchse_price 
+            description: Price of the product 
+            tests: 
+              - not_null 
+              
+      - name: ship 
+        identifier: raw_gz_ship 
+        description: one row for ship 
+        columns: 
+          - name: orders_id 
+            description: unique id of the order 
+            tests: 
+              - not_null 
+              - unique 
+              
+          - name: shipping_fee 
+            description: Price of the shipping 
+            tests: 
+              - not_null
