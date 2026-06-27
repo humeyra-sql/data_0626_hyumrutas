@@ -21,6 +21,11 @@ ship as (
 select
     s.orders_id,
     s.date_date,
+    s.revenue,
+    s.purchase_cost,                        -- satın alma maliyeti (COGS gibi)
+    sh.shipping_fee,                         -- nakliye ücreti (müşteriden alınan veya ödenen senaryona göre)
+    sh.logcost,
+    s.quantity,
     (
         round(s.margin
         + coalesce(cast(sh.shipping_fee as numeric), 0)

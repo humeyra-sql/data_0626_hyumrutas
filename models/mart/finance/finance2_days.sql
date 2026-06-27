@@ -13,7 +13,7 @@ with orders as (
     from {{ ref('int_orders_operational') }}              -- örn: int_orders / stg_orders vs.
 ),
 
-finance_days as (
+finance2_days as (
 
     select
         date_date,
@@ -37,5 +37,5 @@ finance_days as (
 )
 
 select *
-from finance_days
+from finance2_days
 order by date_date

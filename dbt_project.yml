@@ -38,3 +38,8 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   data_0626_hyumrutas:
     +materialized: view
+
+    mart:
+      +materialized: table
+      finance:
+        +schema: finance2_data
