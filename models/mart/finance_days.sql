@@ -1,3 +1,4 @@
+{{ config(materialized='table') }}
 with orders as (
 
     -- 1 satır = 1 sipariş 

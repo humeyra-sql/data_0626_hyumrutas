@@ -21,18 +21,11 @@ ship as (
 select
     s.orders_id,
     s.date_date,
-    s.revenue,
-    s.quantity,
-    s.purchase_cost,
-    s.margin,
-    sh.shipping_fee,
-    sh.ship_cost,
-    sh.logcost,
     (
-        s.margin
+        round(s.margin
         + coalesce(cast(sh.shipping_fee as numeric), 0)
         - coalesce(cast(sh.logcost as numeric), 0)
-        - coalesce(cast(sh.ship_cost as numeric), 0)
+        - coalesce(cast(sh.ship_cost as numeric), 0),2)
     ) as operational_margin
 from sales_margin as s
 left join ship  as sh
