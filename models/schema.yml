@@ -54,3 +54,175 @@ sources:
             description: Price of the shipping 
             tests: 
               - not_null
+
+      - name: adwords 
+        identifier: raw_gz_adwords
+        description: Google search results
+        columns: 
+          - name: date_date
+            description: date of the order placed 
+            tests: 
+              - not_null 
+              
+          - name: paid_source 
+            description: paid source 
+            tests: 
+              - not_null 
+
+          - name: campaign_key
+            description: campaign id 
+            tests: 
+              - not_null 
+
+          - name: camPGN_name
+            description: campaign name 
+            tests: 
+              - not_null
+
+          - name: ads_cost
+            description: sum ads cost
+            tests: 
+              - not_null
+
+          - name: impression
+            description: number of impressions
+            tests: 
+              - not_null
+              
+          - name: click
+            description: number of clicks
+            tests: 
+              - not_null       
+
+
+      - name: bing 
+        identifier: raw_gz_bing
+        description: bing search results
+        columns: 
+          - name: date_date
+            description: date of the order placed 
+            tests: 
+              - not_null 
+              
+          - name: paid_source 
+            description: paid source 
+            tests: 
+              - not_null 
+
+          - name: campaign_key
+            description: campaign id 
+            tests: 
+              - not_null 
+
+          - name: camPGN_name
+            description: campaign name 
+            tests: 
+              - not_null
+
+          - name: ads_cost
+            description: sum ads cost
+            tests: 
+              - not_null
+
+          - name: impression
+            description: number of impressions
+            tests: 
+              - not_null
+              
+          - name: click
+            description: number of clicks
+            tests: 
+              - not_null       
+
+      - name: criteo 
+        identifier: raw_gz_criteo
+        description: criteo search results
+        columns: 
+          - name: date_date
+            description:  date of the order placed 
+            tests: 
+              - not_null 
+              
+          - name: paid_source 
+            description: paid source 
+            tests: 
+              - not_null 
+
+          - name: campaign_key
+            description: campaign id 
+            tests: 
+              - not_null 
+
+          - name: camPGN_name
+            description: campaign name 
+            tests: 
+              - not_null
+
+          - name: ads_cost
+            description: sum ads cost
+            tests: 
+              - not_null
+
+          - name: impression
+            description: number of impressions
+            tests: 
+              - not_null
+              
+          - name: click
+            description: number of clicks
+            tests: 
+              - not_null
+
+      - name: facebook 
+        identifier: raw_gz_facebook
+        description: facebook search results
+        columns: 
+          - name: date_date
+            description: date of the order placed 
+            tests: 
+              - not_null 
+              
+          - name: paid_source 
+            description: paid source 
+            tests: 
+              - not_null 
+
+          - name: campaign_key
+            description: campaign id 
+            tests: 
+              - not_null 
+
+          - name: camPGN_name
+            description: campaign name 
+            tests: 
+              - not_null
+
+          - name: ads_cost
+            description: sum ads cost
+            tests: 
+              - not_null
+
+          - name: impression
+            description: number of impressions
+            tests: 
+              - not_null
+              
+          - name: click
+            description: number of clicks
+            tests: 
+              - not_null 
+models:
+  - name: int_campaigns
+    columns:
+      - name: campaign_id
+        tests: [not_null, unique]
+
+
+  - name: int_campaigns_day
+    description: "Daily aggregation of int_campaigns."
+    columns:
+      - name: date_date
+        description: "Primary key (one row per day)."
+        tests:
+          - not_null
+          - unique        

@@ -41,5 +41,11 @@ models:
 
     mart:
       +materialized: table
-      finance:
-        +schema: finance2_data
+
+    mart_finance:
+      +schema: finance2_data
+
+    circle_parcel:
+      +schema: parcel_dbt_dev
+
+
