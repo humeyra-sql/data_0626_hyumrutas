@@ -3,7 +3,7 @@ select
  parcel_id,
  sum(qty) as qty,
  count(distinct model_name) as nb_product
-from {{ref('stg_cc_parcel_product')}}
+from {{ref('stg_cc_parcel_products')}}
 group by parcel_id
 )
 select
@@ -25,7 +25,7 @@ select
   end as status,
   date_diff(p.date_shipping,p.date_purchase, day) as expedition_time,
   date_diff(p.date_delivery,p.date_shipping, day) as transport_time,
-  date_diff(p.date_delivery,p.date_purchase, day) as deliery_time,
+  date_diff(p.date_delivery,p.date_purchase, day) as delivery_time,
 
 case
   when p.date_delivery is null then null
