@@ -1,0 +1,32 @@
+version: 2
+
+sources :
+  - name: raw_data_circle
+    schema: raw_data_circle
+    tables:
+      - name: raw_cc_parcel
+      - name: raw_cc_parcel_product
+models:
+  - name: cc_parcel
+    columns:
+      - name: parcel_id
+        tests:
+          - not_null
+          - unique
+
+  - name: cc_parcel_products
+    columns:
+      - name: parcel_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('cc_parcel')
+                field: parcel_id
+      - name: model_name
+        tests:
+          - not_null
+
+      - name: qty
+        tests:
+          - not_null                 
